@@ -27,12 +27,11 @@ def delete()
 		end
 		if instances.empty?
 			@logger.info("deleting #{group.id}")
-			group..delete
+			group.delete
 		end
 	end
 end
 
-#logger = set_logger('sg-monkey')
 while true
 	@logger.info('starting delete')
 	delete()
