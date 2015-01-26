@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# sg monkey - deletes unloved sgs
+# requires ruby 2.1.X
+# loggin added to stdout
+
+
+require 'rubygems'
+require 'aws-sdk-v1'
+require 'log4r'
+require 'pp'
+
+AWS.config( :region => 'us-west-2')
+
+@logger = Log4r::Logger.new('sg-monkey')
+@logger.outputters << Log4r::Outputter.stdout
+
+#
+# get all security groups and if no ec2 instances are 
+# using the sg delete it
+#
+def delete()
+	ec2 = AWS::EC2.new
+	group = ec2.security_groups.each do |group| 
+		instances = []
+		group.instances.each do |instance|
+			instances << instance.id
+		end
+		if instances.empty?
+			@logger.info("deleting #{group.id}")
+			group..delete
+		end
+	end
+end
+
+#logger = set_logger('sg-monkey')
+while true
+	@logger.info('starting delete')
+	delete()
+	@logger.info('finished delete')
+	@logger.info('sleeping for 1 hour')
+	sleep(360)
+end
