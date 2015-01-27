@@ -28,6 +28,9 @@ def delete()
 		if instances.empty?
 			@logger.info("deleting #{group.id}")
 			group.delete
+			rescue ::AWS::EC2::Errors::DependencyViolation => e
+				@logger.error("unable to delete security group #{group} because of dependancy") 
+			end
 		end
 	end
 end
