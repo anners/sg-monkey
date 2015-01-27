@@ -9,5 +9,5 @@ ENV PATH $PATH:/usr/local/rvm/rubies/ruby-2.2.0/bin
 RUN gem install daemons
 RUN gem install aws-sdk-v1
 RUN gem install log4r
-RUN git clone -b v0.9b https://gitlab.pes.nike.com/awall6/sg-monkey.git /usr/local/monkey
+RUN git clone https://gitlab.pes.nike.com/awall6/sg-monkey.git /usr/local/monkey
 CMD /usr/local/monkey/sg-monkey

@@ -31,7 +31,7 @@ def delete()
 			group.delete
 			rescue AWS::EC2::Errors::DependencyViolation => e
 				@logger.error("unable to delete security group #{group} because of dependancy") 
-			rescue AWS::EC2::Errors::CannotDelete =>
+			rescue AWS::EC2::Errors::CannotDelete => e
 				@logger.error("cannot delete the default sg")
 			end
 		end
