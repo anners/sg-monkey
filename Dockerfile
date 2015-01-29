@@ -10,4 +10,4 @@ RUN gem install daemons
 RUN gem install aws-sdk-v1
 RUN gem install log4r
 RUN git clone https://gitlab.pes.nike.com/awall6/sg-monkey.git /usr/local/monkey
-CMD /usr/local/monkey/sg-monkey
+CMD /usr/local/monkey/sg-monkey -s 14400
